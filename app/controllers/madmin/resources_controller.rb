@@ -46,7 +46,7 @@ module Madmin
     private
 
     def madmin_resource
-      resource
+      Object.const_get("::Resources::#{resource_name}")
     end
 
     def resource
