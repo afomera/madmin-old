@@ -1,15 +1,17 @@
-<h1><%= @resource.class.name %> <%= @resource.id %></h1>
+<h1><%= @resource.name %> <%= @resource.id %></h1>
 
 <table>
-  <% @resource.attributes.each do |key, value| %>
-    <tr>
-      <td>
-        <%= key %>
-      </td>
-      <td>
-        <%= value %>
-      </td>
-    </tr>
+  <% @resource.fields.each do |field| %>
+    <% if field.readable? %>
+      <tr>
+        <td>
+          <%= field.key %>
+        </td>
+        <td>
+          <%= field.value %>
+        </td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
 

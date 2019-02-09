@@ -3,7 +3,7 @@ module Madmin
     isolate_namespace Madmin
 
     config.to_prepare do
-      Dir.glob("#{Rails.root}/app/resources/**/*.rb").each { |r| require_dependency(r) }
+      Dir.glob("#{Rails.root}/app/madmin/**/*.rb").each { |r| require_dependency(r) }
     end
   end
 end

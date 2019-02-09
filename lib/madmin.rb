@@ -1,4 +1,5 @@
 require "madmin/engine"
+require "madmin/resourceable"
 require "madmin/resources"
 
 module Madmin

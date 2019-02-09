@@ -4,19 +4,18 @@ module Madmin
   class ResourcesController < ApplicationController
     include ActiveSupport::Inflector
 
-    helper_method :madmin_resource
-    helper_method :resource_name
+    before_action :find_resource, only: [:show, :edit, :update, :destroy]
+
+    helper_method :resource
 
     def index
       @resources = resource.all
     end
 
-    def show
-      @resource = resource.find(params[:id])
-    end
+    def show; end
 
     def new
-      @resource = resource.new
+      @resource = ResourceDecorator.new(resource.new)
     end
 
     def create
@@ -25,19 +24,15 @@ module Madmin
       redirect_to resource_path(id: @resource.id)
     end
 
-    def edit
-      @resource = resource.find(params[:id])
-    end
+    def edit; end
 
     def update
-      @resource = resource.find(params[:id])
       @resource.update(resource_params)
 
       redirect_to resource_path(id: @resource.id)
     end
 
     def destroy
-      @resource = resource.find(params[:id])
       @resource.destroy!
 
       redirect_to resources_path(params[:resource])
@@ -45,8 +40,12 @@ module Madmin
 
     private
 
+    def find_resource
+      @resource ||= Madmin::ResourceDecorator.new(resource.find(params[:id]))
+    end
+
     def madmin_resource
-      Object.const_get("::Resources::#{resource_name}")
+      Object.const_get("::Madmin::Resources::#{resource_name}Resource")
     end
 
     def resource
@@ -58,7 +57,7 @@ module Madmin
     end
 
     def resource_params
-      params.require(resource_name.downcase.to_sym).permit(resource.permitted_params)
+      params.require(resource_name.downcase.to_sym).permit(madmin_resource.editable_fields)
     end
   end
 end

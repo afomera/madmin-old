@@ -8,3 +8,5 @@ Style/SymbolArray:
   Enabled: false
 Style/WordArray:
   Enabled: false
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
