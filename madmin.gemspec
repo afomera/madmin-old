@@ -1,4 +1,4 @@
-$:.push File.expand_path("lib", __dir__)
+$LOAD_PATH.push File.expand_path("lib", __dir__)
 
 # Maintain your gem's version:
 require "madmin/version"
@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.version     = Madmin::VERSION
   spec.authors     = ["Jason Charnes"]
   spec.email       = ["jason@thecharnes.com"]
-  spec.homepage    = "TODO"
-  spec.summary     = "TODO: Summary of Madmin."
-  spec.description = "TODO: Description of Madmin."
+  spec.homepage    = "https://madmin.jasoncharnes.com"
+  spec.summary     = "Administration for Rails"
+  spec.description = "Administration for Rails"
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -27,5 +27,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", "~> 5.2.2"
 
-  spec.add_development_dependency "sqlite3"
+  spec.add_development_dependency "pry-rails"
+  spec.add_development_dependency "sqlite3", "~> 1.3.6"
 end

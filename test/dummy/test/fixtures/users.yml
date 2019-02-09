@@ -1,0 +1,6 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+jason:
+  email: jason@charn.es
+  first_name: Jason
+  last_name: Charnes

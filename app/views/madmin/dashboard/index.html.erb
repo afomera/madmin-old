@@ -1,0 +1,6 @@
+<h1>Administration</h1>
+<% @resources.each do |resource| %>
+  <li>
+    <%= link_to resource, resources_path(resource.to_s.downcase.pluralize) %>
+  </li>
+<% end %>

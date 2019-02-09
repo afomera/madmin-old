@@ -1,0 +1,17 @@
+<%= form_for resource, url: url do |f| %>
+  <% resource.attributes.each do |key, value| %>
+    <% if madmin_resource.permit_all_params? %>
+      <div>
+        <%= f.text_field key.to_sym %>
+      </div>
+    <% else %>
+      <% if madmin_resource.permitted_params.include?(key.to_sym) %>
+        <div>
+          <%= f.text_field key.to_sym %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>
