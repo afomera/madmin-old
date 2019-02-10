@@ -1,4 +1,10 @@
 <%= form_for resource, url: url do |f| %>
+  <% if resource.errors.any? %>
+    <% resource.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  <% end %>
+
   <% resource.fields.each do |field| %>
     <% if field.editable? %>
       <div>

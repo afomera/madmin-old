@@ -19,23 +19,32 @@ module Madmin
     end
 
     def create
-      @resource = resource.create(resource_params)
+      @resource = ResourceDecorator.new(resource.new(resource_params))
 
-      redirect_to resource_path(id: @resource.id)
+      if @resource.save
+        redirect_to resource_path(id: @resource.id)
+      else
+        render :new
+      end
     end
 
     def edit; end
 
     def update
-      @resource.update(resource_params)
-
-      redirect_to resource_path(id: @resource.id)
+      if @resource.update(resource_params)
+        redirect_to resource_path(id: @resource.id)
+      else
+        render :edit
+      end
     end
 
     def destroy
-      @resource.destroy!
-
-      redirect_to resources_path(params[:resource])
+      if @resource.destroy
+        redirect_to resources_path(params[:resource])
+      else
+        flash[:error] = "There was an issue deleting the record."
+        redirect_to :back
+      end
     end
 
     private
@@ -57,7 +66,8 @@ module Madmin
     end
 
     def resource_params
-      params.require(resource_name.downcase.to_sym).permit(madmin_resource.editable_fields.keys)
+      params.require(resource_name.downcase.to_sym)
+            .permit(madmin_resource.editable_fields.keys)
     end
   end
 end
