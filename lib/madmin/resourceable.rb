@@ -18,6 +18,7 @@ module Madmin
         new_fields[args[0]] = args[1]
         class_variable_set(:@@fields, new_fields)
         class_variable_set(:@@editable_fields, new_fields)
+        class_variable_set(:@@readable_fields, new_fields)
       end
 
       def editable_fields
@@ -29,17 +30,21 @@ module Madmin
       end
 
       def edit_all_fields?
-        class_variable_get(:@@editable_fields)
+        class_variable_get(:@@edit_all_fields)
       rescue NameError
         false
       end
 
+      def readable_fields
+        class_variable_get(:@@readable_fields)
+      end
+
       def read_all_fields!
-        class_variable_set(:@@edit_all_fields, true)
+        class_variable_set(:@@read_all_fields, true)
       end
 
       def read_all_fields?
-        class_variable_get(:@@readable_fields)
+        class_variable_get(:@@read_all_fields)
       rescue NameError
         false
       end
