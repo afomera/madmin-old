@@ -3,10 +3,9 @@ module Madmin
     class CarResource
       include Madmin::Resourceable
 
-      # editable_fields :make, :model, :year
-      # showable_fields :id, :make, :model, :year
-
-      field :year, Madmin::Field::Number
+      field :year, Madmin::Field::Number, write: true
+      field :make, Madmin::Field::Text, write: true
+      field :model, Madmin::Field::Text, write: true
     end
   end
 end
