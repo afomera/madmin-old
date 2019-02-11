@@ -9,7 +9,7 @@ module Madmin
     helper_method :resource
 
     def index
-      @resources = resource.all
+      @resources = resource.all.map { |r| ResourceDecorator.new(r) }
     end
 
     def show; end

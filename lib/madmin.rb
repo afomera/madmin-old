@@ -5,7 +5,7 @@ require "madmin/resources"
 module Madmin
   class NoResourcesError < StandardError; end
   class ResourceNotFoundError < StandardError; end
-  class MethodNotImplemented < StandardError; end
+  class WrongArgumentError < StandardError; end
 
   # Your code goes here...
 end

@@ -4,6 +4,7 @@ module Madmin
     delegate :edit_all_fields?, to: :madmin_resource
     delegate :readable_fields, to: :madmin_resource
     delegate :read_all_fields?, to: :madmin_resource
+    delegate :table_fields, to: :madmin_resource
 
     def initialize(resource)
       @resource = resource
@@ -12,7 +13,7 @@ module Madmin
 
     def fields
       madmin_resource.fields.map do |key, field|
-        field.new(key: key, resource: self)
+        field[:type].new(key: key, resource: self)
       end
     end
 

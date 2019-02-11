@@ -1,9 +1,19 @@
 <h1><%= resource.name.pluralize %></h1>
 
-<% @resources.each do |resource| %>
-  <li>
-    <%= link_to resource.id, resource_path(id: resource.id) %>
-  </li>
-<% end %>
+<table>
+  <% @resources.each do |resource| %>
+    <tr>
+      <% resource.table_fields.each.with_index do |field, index| %>
+        <td>
+          <% if index.zero? %>
+            <%= link_to resource.id, resource_path(id: resource.id) %>
+          <% else %>
+            <%= resource.send(field[0]) %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
 
 <%= link_to 'New', new_resource_path %>

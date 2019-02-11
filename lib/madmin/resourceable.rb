@@ -14,15 +14,23 @@ module Madmin
       end
 
       def field(*args)
+        validate_arguments!(args)
+
         new_fields = fields
-        new_fields[args[0]] = args[1]
+        options = args.last
+
+        new_fields[args[0].to_sym] = {
+          read: options.is_a?(Hash) ? options.fetch(:read, true) : false,
+          table: options.is_a?(Hash) ? options.fetch(:table, false) : false,
+          type: args[1],
+          write: options.is_a?(Hash) ? options.fetch(:write, false) : false
+        }
+
         class_variable_set(:@@fields, new_fields)
-        class_variable_set(:@@editable_fields, new_fields)
-        class_variable_set(:@@readable_fields, new_fields)
       end
 
       def editable_fields
-        class_variable_get(:@@editable_fields)
+        fields.select { |_key, value| value[:write] }
       end
 
       def edit_all_fields!
@@ -36,7 +44,7 @@ module Madmin
       end
 
       def readable_fields
-        class_variable_get(:@@readable_fields)
+        fields.select { |_key, value| value[:read] }
       end
 
       def read_all_fields!
@@ -47,6 +55,30 @@ module Madmin
         class_variable_get(:@@read_all_fields)
       rescue NameError
         false
+      end
+
+      def table_fields
+        fields.select { |_key, value| value[:table] }
+      end
+
+      private
+
+      def column?(column)
+        column.is_a?(Symbol) || column.is_a?(String)
+      end
+
+      def valid_type?(type)
+        type.to_s.deconstantize == Madmin::Field.to_s
+      end
+
+      def validate_arguments!(args)
+        if !column?(args.first)
+          raise WrongArgumentError,
+                "#{name} expected the column name as a symbol or string as the first argument."
+        elsif !valid_type?(args.second)
+          raise WrongArgumentError,
+                "#{name} expected Madmin::Field type as the field type as the second argument."
+        end
       end
     end
   end
