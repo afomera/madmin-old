@@ -7,9 +7,9 @@ module Madmin
       # showable_fields :id, :email, :first_name, :last_name
 
       field :id, Madmin::Field::Number, table: true
-      field :email, Madmin::Field::Email, table: true, write: true
-      field :first_name, Madmin::Field::Text, table: true
-      field :last_name, Madmin::Field::Text, table: true
+      field :email, Madmin::Field::Email, table: true, write: true, label: "Customer email"
+      field :first_name, Madmin::Field::Text, table: true, write: true
+      field :last_name, Madmin::Field::Text, table: true, write: true
     end
   end
 end

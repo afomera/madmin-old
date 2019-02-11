@@ -13,7 +13,7 @@ module Madmin
 
     def fields
       madmin_resource.fields.map do |key, field|
-        field[:type].new(key: key, resource: self)
+        field[:type].new(key: key, label: field[:label], resource: self)
       end
     end
 

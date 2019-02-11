@@ -16,17 +16,22 @@ module Madmin
       def field(*args)
         validate_arguments!(args)
 
-        new_fields = fields
-        options = args.last
+        fresh_fields = fields
 
-        new_fields[args[0].to_sym] = {
-          read: options.is_a?(Hash) ? options.fetch(:read, true) : false,
-          table: options.is_a?(Hash) ? options.fetch(:table, false) : false,
+        options = args.last
+        has_options = options.is_a?(Hash)
+
+        default_label = label_from_column(args[0])
+
+        fresh_fields[args[0].to_sym] = {
+          label: has_options ? options.fetch(:label, default_label) : default_label,
+          read: has_options ? options.fetch(:read, true) : false,
+          table: has_options ? options.fetch(:table, false) : false,
           type: args[1],
-          write: options.is_a?(Hash) ? options.fetch(:write, false) : false
+          write: has_options ? options.fetch(:write, false) : false
         }
 
-        class_variable_set(:@@fields, new_fields)
+        class_variable_set(:@@fields, fresh_fields)
       end
 
       def editable_fields
@@ -65,6 +70,10 @@ module Madmin
 
       def column?(column)
         column.is_a?(Symbol) || column.is_a?(String)
+      end
+
+      def label_from_column(column)
+        column.to_s.humanize
       end
 
       def valid_type?(type)

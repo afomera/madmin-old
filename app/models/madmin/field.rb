@@ -1,10 +1,12 @@
 module Madmin
   class Field
     attr_reader :key
+    attr_reader :label
     attr_reader :resource
 
-    def initialize(key:, resource:)
+    def initialize(key:, label:, resource:)
       @key = key
+      @label = label
       @resource = resource
     end
 
