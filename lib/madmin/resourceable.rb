@@ -36,6 +36,10 @@ module Madmin
         false
       end
 
+      def name
+        super.to_s.split("::").last.underscore.split("_").reverse.drop(1).join(" ").capitalize
+      end
+
       def readable_fields
         fields.select { |_key, value| value[:read] }
       end
@@ -48,6 +52,10 @@ module Madmin
         class_variable_get(:@@read_all_fields)
       rescue NameError
         false
+      end
+
+      def show_in_menu?
+        true
       end
 
       def table_fields

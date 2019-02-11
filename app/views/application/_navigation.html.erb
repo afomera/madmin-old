@@ -1,0 +1,10 @@
+<h2>Madmin</h2>
+<ul>
+  <% resource_types.each do |type| %>
+    <% next unless type.show_in_menu? %>
+
+    <li>
+      <%= link_to type.name.pluralize, resources_path(type.name.downcase.pluralize) %>
+    </li>
+  <% end %>
+</ul>
