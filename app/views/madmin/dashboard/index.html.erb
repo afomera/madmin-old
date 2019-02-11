@@ -1,6 +1,6 @@
 <h1>Administration</h1>
 <% resource_types.each do |type| %>
   <li>
-    <%= link_to type.to_s.pluralize, resources_path(type.to_s.downcase.pluralize) %>
+    <%= link_to type.name.pluralize, resources_path(type.name.downcase.pluralize) %>
   </li>
 <% end %>
