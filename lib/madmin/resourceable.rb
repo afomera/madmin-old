@@ -50,8 +50,12 @@ module Madmin
         false
       end
 
+      def friendly_name
+        name.split("::").join(" ")
+      end
+
       def name
-        super.to_s.split("Madmin::Resources::").last
+        super.to_s.split("Madmin::Resources::").last.to_s
       end
 
       def showable_fields

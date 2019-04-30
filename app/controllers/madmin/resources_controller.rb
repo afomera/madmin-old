@@ -27,7 +27,7 @@ module Madmin
     end
 
     def new
-      @resource = ResourceDecorator.new(resource.new)
+      @resource = ResourceDecorator.new(resource.new(resource_params))
     end
 
     def create
@@ -83,7 +83,10 @@ module Madmin
     end
 
     def resource_params
-      params.require(resource_name.downcase.to_sym).permit(form_keys)
+      param_key = resource_name.downcase.to_sym
+      return unless params.dig(param_key)
+
+      params.require(param_key).permit(form_keys)
     end
   end
 end

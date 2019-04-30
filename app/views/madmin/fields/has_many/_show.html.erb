@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col">
       <h3><%= field.name %></h3>
+      <%= link_to "Add", new_resource_path(Madmin::ResourceDecorator.new(field.foreign_class.new).slug, ActiveModel::Naming.param_key(field.foreign_class) => { field.foreign_key => field.resource.id }) %>
       <%= render "madmin/resources/index/content", headers: [], collection: field.value.map { |v| Madmin::ResourceDecorator.new(v) }, show_new_button: false %>
     </div>
   </div>

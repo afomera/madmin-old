@@ -1,7 +1,7 @@
 module Madmin
   class Resources
     def self.all
-      [User, Car]
+      [User, Car, Madmin::Resources::Cars::Review]
     end
   end
 end
