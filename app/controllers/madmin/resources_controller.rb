@@ -10,7 +10,7 @@ module Madmin
 
     def index
       @scopes = madmin_resource.scopes
-      @headers = madmin_resource.index_fields.keys
+      @headers = madmin_resource.index_fields.map { |_, v| v[:label] }
 
       if params[:scope]&.to_sym&.in?(@scopes)
         begin
