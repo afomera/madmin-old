@@ -1,6 +1,6 @@
 <h1><%= @resource.name %> <%= @resource.id %></h1>
 
-<table>
+<table class="table">
   <% @resource.fields.each do |field| %>
     <% if field.readable? %>
       <tr>
