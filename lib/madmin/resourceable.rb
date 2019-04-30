@@ -92,7 +92,7 @@ module Madmin
           show: has_options ? options.fetch(:show, true) : false,
           index: has_options ? options.fetch(:index, false) : false,
           type: args[1],
-          form: has_options ? options.fetch(:form, false) : false
+          form: has_options ? options.fetch(:form, false) : false,
         }
       end
 
@@ -107,18 +107,18 @@ module Madmin
       def validate_arguments!(args)
         if !column?(args.first)
           raise WrongArgumentError,
-                "#{name} expected the column name as a symbol or string as the first argument."
+            "#{name} expected the column name as a symbol or string as the first argument."
         elsif !valid_type?(args.second)
           raise WrongArgumentError,
-                "#{name} expected Madmin::Field type as the field type as the second argument."
+            "#{name} expected Madmin::Field type as the field type as the second argument."
         end
       end
 
       def validate_scopes!(args)
         args.each do |arg|
-          if !self.name.constantize.respond_to?(arg)
+          unless name.constantize.respond_to?(arg)
             raise UndefinedScopeError,
-                  ".#{arg.to_s} is not a valid scope on #{self.name}"
+              ".#{arg} is not a valid scope on #{name}"
           end
         end
       end

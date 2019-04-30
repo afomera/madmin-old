@@ -11,9 +11,9 @@ module Madmin
     private
 
     def resource_types
-      @resource_types ||= Madmin::Resources.gather.map do |type|
+      @resource_types ||= Madmin::Resources.gather.map { |type|
         Object.const_get("::Madmin::Resources::#{type}Resource")
-      end
+      }
     end
 
     # Taking a peek at all the resources will raise an error if one isn't found.

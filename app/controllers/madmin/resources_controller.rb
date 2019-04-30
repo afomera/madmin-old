@@ -12,10 +12,10 @@ module Madmin
       @scopes = madmin_resource.scopes
       @headers = madmin_resource.index_fields.keys
 
-      if params[:scope] && params[:scope].to_sym.in?(@scopes)
+      if params[:scope]&.to_sym&.in?(@scopes)
         begin
           @resources = resource.send(params[:scope]).map { |r| ResourceDecorator.new(r) }
-        rescue ArgumentError => e
+        rescue ArgumentError
           raise ScopeWithArgumentsError, "The scope #{params[:scope.to_sym]} on #{resource.name} takes arguments, which are currently unsupported."
         end
       else
@@ -23,7 +23,8 @@ module Madmin
       end
     end
 
-    def show; end
+    def show
+    end
 
     def new
       @resource = ResourceDecorator.new(resource.new)
@@ -39,7 +40,8 @@ module Madmin
       end
     end
 
-    def edit; end
+    def edit
+    end
 
     def update
       if @resource.update(resource_params)
@@ -78,7 +80,7 @@ module Madmin
 
     def resource_params
       params.require(resource_name.downcase.to_sym)
-            .permit(madmin_resource.formable_fields.keys)
+        .permit(madmin_resource.formable_fields.keys)
     end
   end
 end

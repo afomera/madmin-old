@@ -5,7 +5,7 @@ module Madmin
       all
     rescue NoMethodError
       raise NoResourcesError,
-            "You must define an array of resources as `self.all` in lib/madmin/resources.rb"
+        "You must define an array of resources as `self.all` in lib/madmin/resources.rb"
     rescue NameError => e
       raise ResourceNotFoundError, "Madmin cannot locate the resource #{e.name}."
     end

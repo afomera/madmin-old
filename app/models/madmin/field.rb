@@ -19,7 +19,7 @@ module Madmin
     end
 
     def to_partial_path
-      "madmin/fields/#{self.class.to_s.split('::').last.underscore}"
+      "madmin/fields/#{self.class.to_s.split("::").last.underscore}"
     end
 
     def value
