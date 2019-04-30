@@ -8,7 +8,7 @@ module Madmin
       field :model, Madmin::Field::Text, index: true, form: true
       field :discontinued, Madmin::Field::CheckBox, form: true, show: false
       # 👇 Must match association in model
-      field :user, Madmin::Field::BelongsTo, index: true, form: true, scope: :active
+      field :user, Madmin::Field::BelongsTo, index: true, form: true, scope: :active, display_value: :title
     end
   end
 end

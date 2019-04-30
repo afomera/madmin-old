@@ -1,6 +1,7 @@
 module Madmin
   class Field
     attr_reader :foreign_class
+    attr_reader :foreign_display_value
     attr_reader :foreign_key
     attr_reader :foreign_scope
     attr_reader :key
@@ -11,6 +12,7 @@ module Madmin
       @foreign_class = field[:foreign_class]
       @foreign_key = field[:foreign_key]
       @foreign_scope = field[:foreign_scope]
+      @foreign_display_value = field[:foreign_display_value]
       @key = key
       @label = field[:label]
       @resource = resource

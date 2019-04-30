@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def name
     "#{first_name} #{last_name}"
   end
+
+  def title
+    "Mr. #{first_name}"
+  end
 end

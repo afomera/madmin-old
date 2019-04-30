@@ -66,6 +66,10 @@ module Madmin
       @resource ||= Madmin::ResourceDecorator.new(resource.find(params[:id]))
     end
 
+    def form_keys
+      madmin_resource.formable_fields.map { |key, value| value.dig(:foreign_key) ? value[:foreign_key] : key }
+    end
+
     def madmin_resource
       Object.const_get("::Madmin::Resources::#{resource_name}Resource")
     end
@@ -79,8 +83,7 @@ module Madmin
     end
 
     def resource_params
-      params.require(resource_name.downcase.to_sym)
-        .permit(madmin_resource.formable_fields.keys)
+      params.require(resource_name.downcase.to_sym).permit(form_keys)
     end
   end
 end

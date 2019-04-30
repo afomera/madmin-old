@@ -98,7 +98,8 @@ module Madmin
         if args[1].association?
           association = name.constantize.reflect_on_all_associations.find { |association| association.name == args[0] }
           fields[:foreign_class] = association.klass
-          fields[:foreign_key]   = association.foreign_key
+          fields[:foreign_display_value] = has_options ? options.fetch(:display_value, :name) : :name
+          fields[:foreign_key] = association.foreign_key
           fields[:foreign_scope] = has_options ? options.fetch(:scope, :all) : :all
         end
 
