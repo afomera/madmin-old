@@ -12,6 +12,7 @@ module Madmin
       field :first_name, Madmin::Field::Text, index: true, form: true
       field :last_name, Madmin::Field::Text, index: true, form: true
       field :active, Madmin::Field::CheckBox, index: true, form: true
+      field :cars, Madmin::Field::HasMany, form: true
     end
   end
 end

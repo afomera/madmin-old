@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-3">
+    <%= field.label %>
+  </div>
+  <div class="col-9">
+    <% field.value.each do |v| %>
+      <li>
+        <%= link_to v.send(field.foreign_display_value), resource_path(field.foreign_class.table_name, v.id) %>
+        <%= link_to 'X', resource_path(field.foreign_class.table_name, v.id), method: :delete, data: { confirm: "Are you sure?" } %>
+      </li>
+    <% end %>
+  </div>
+</div>
