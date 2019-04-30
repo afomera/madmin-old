@@ -1,7 +1,7 @@
 module Madmin
   class Resources
     def self.all
-      [User]
+      [User, Post]
     end
   end
 end
