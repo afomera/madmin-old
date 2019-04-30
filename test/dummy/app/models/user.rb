@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :cars
+  # has_many :cars
+  has_one :car
 
   validates :first_name, presence: true
   validates :last_name, presence: true

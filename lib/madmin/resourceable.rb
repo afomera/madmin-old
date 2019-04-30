@@ -108,7 +108,7 @@ module Madmin
           fields[:foreign_class] = association.klass
           fields[:foreign_display_value] = has_options ? options.fetch(:display_value, :name) : :name
           fields[:foreign_key] = association.foreign_key
-          fields[:foreign_scope] = has_options ? options.fetch(:scope, :all) : :all
+          fields[:foreign_scope] = :all
         end
 
         fields

@@ -7,7 +7,7 @@ module Madmin
       field :make, Madmin::Field::Text, index: true, form: true
       field :model, Madmin::Field::Text, index: true, form: true
       field :discontinued, Madmin::Field::CheckBox, form: true, show: false
-      field :user, Madmin::Field::BelongsTo, index: true, form: true, scope: :active, display_value: :title
+      field :user, Madmin::Field::BelongsTo, index: true, form: true, display_value: :title
     end
   end
 end
