@@ -14,12 +14,12 @@ module Madmin
 
       if params[:scope]&.to_sym&.in?(@scopes)
         begin
-          @resources = resource.send(params[:scope]).map { |r| ResourceDecorator.new(r) }
+          @collection = resource.send(params[:scope]).map { |r| ResourceDecorator.new(r) }
         rescue ArgumentError
           raise ScopeWithArgumentsError, "The scope #{params[:scope.to_sym]} on #{resource.name} takes arguments, which are currently unsupported."
         end
       else
-        @resources = resource.all.map { |r| ResourceDecorator.new(r) }
+        @collection = resource.all.map { |r| ResourceDecorator.new(r) }
       end
     end
 
@@ -71,7 +71,7 @@ module Madmin
     end
 
     def madmin_resource
-      Object.const_get("::Madmin::Resources::#{resource_name}Resource")
+      Object.const_get("::Madmin::Resources::#{resource_name}")
     end
 
     def resource

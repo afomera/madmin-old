@@ -1,13 +1,8 @@
-<div class="row">
-  <div class="col-3">
-    <%= field.label %>
-  </div>
-  <div class="col-9">
-    <% field.value.each do |v| %>
-      <li>
-        <%= link_to v.send(field.foreign_display_value), resource_path(field.foreign_class.table_name, v.id) %>
-        <%= link_to 'X', resource_path(field.foreign_class.table_name, v.id), method: :delete, data: { confirm: "Are you sure?" } %>
-      </li>
-    <% end %>
+<div class="mt-3">
+  <div class="row">
+    <div class="col">
+      <h3><%= field.name %></h3>
+      <%= render "madmin/resources/index/content", headers: [], collection: field.value.map { |v| Madmin::ResourceDecorator.new(v) }, show_new_button: false %>
+    </div>
   </div>
 </div>

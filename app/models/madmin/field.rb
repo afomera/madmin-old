@@ -26,6 +26,10 @@ module Madmin
       resource.form_all_fields? || key.in?(resource.formable_fields)
     end
 
+    def name
+      key.to_s.titleize
+    end
+
     def readable?
       resource.show_all_fields? || key.in?(resource.showable_fields)
     end

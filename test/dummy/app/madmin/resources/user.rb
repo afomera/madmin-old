@@ -1,6 +1,6 @@
 module Madmin
   class Resources
-    class UserResource
+    class User
       include Madmin::Resourceable
 
       scope :active

@@ -51,7 +51,7 @@ module Madmin
       end
 
       def name
-        super.to_s.split("::").last.underscore.split("_").reverse.drop(1).join(" ").capitalize
+        super.to_s.split("Madmin::Resources::").last
       end
 
       def showable_fields
@@ -70,6 +70,10 @@ module Madmin
 
       def show_in_menu?
         true
+      end
+
+      def slug
+        ActiveModel::Naming.route_key(name.constantize)
       end
 
       def index_fields

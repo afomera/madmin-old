@@ -3,16 +3,14 @@ require_dependency "madmin/resources"
 module Madmin
   class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
-
     before_action :validate_resources
-
     helper_method :resource_types
 
     private
 
     def resource_types
       @resource_types ||= Madmin::Resources.gather.map { |type|
-        Object.const_get("::Madmin::Resources::#{type}Resource")
+        Object.const_get("::Madmin::Resources::#{type}")
       }
     end
 

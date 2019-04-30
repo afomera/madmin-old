@@ -5,6 +5,7 @@ module Madmin
     delegate :showable_fields, to: :madmin_resource
     delegate :show_all_fields?, to: :madmin_resource
     delegate :index_fields, to: :madmin_resource
+    delegate :slug, to: :madmin_resource
 
     def initialize(resource)
       @resource = resource
@@ -20,7 +21,7 @@ module Madmin
     end
 
     def madmin_resource
-      Object.const_get("::Madmin::Resources::#{name}Resource")
+      Object.const_get("::Madmin::Resources::#{name}")
     end
 
     def name

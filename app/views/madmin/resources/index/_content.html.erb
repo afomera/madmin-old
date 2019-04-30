@@ -4,7 +4,7 @@
       <th><%= header.to_s.titleize %></th>
     <% end %>
   </thead>
-  <% resources.each do |resource| %>
+  <% collection.each do |resource| %>
     <tr>
       <% resource.index_fields.each do |field| %>
         <td>
@@ -15,6 +15,8 @@
   <% end %>
 </table>
 
-<div class="mt-4">
-  <%= link_to 'New', new_resource_path, class: "btn btn-primary" %>
-</div>
+<% if show_new_button %>
+  <div class="mt-4">
+    <%= link_to 'New', new_resource_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

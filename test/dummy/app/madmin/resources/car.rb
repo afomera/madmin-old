@@ -1,6 +1,6 @@
 module Madmin
   class Resources
-    class CarResource
+    class Car
       include Madmin::Resourceable
 
       field :year, Madmin::Field::Number, index: true, form: true
