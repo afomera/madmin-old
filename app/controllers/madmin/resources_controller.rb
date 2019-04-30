@@ -9,7 +9,18 @@ module Madmin
     helper_method :resource
 
     def index
-      @resources = resource.all.map { |r| ResourceDecorator.new(r) }
+      @scopes = madmin_resource.scopes
+      @headers = madmin_resource.index_fields.keys
+
+      if params[:scope] && params[:scope].to_sym.in?(@scopes)
+        begin
+          @resources = resource.send(params[:scope]).map { |r| ResourceDecorator.new(r) }
+        rescue ArgumentError => e
+          raise ScopeWithArgumentsError, "The scope #{params[:scope.to_sym]} on #{resource.name} takes arguments, which are currently unsupported."
+        end
+      else
+        @resources = resource.all.map { |r| ResourceDecorator.new(r) }
+      end
     end
 
     def show; end

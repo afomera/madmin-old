@@ -1,17 +1,15 @@
-<h1><%= resource.name.pluralize %></h1>
-
-<table class="table">
-  <% @resources.each do |resource| %>
-    <tr>
-      <% resource.index_fields.each do |field| %>
-        <td>
-          <%= render "#{field.to_partial_path}/index", field: field, resource: resource %>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
-
-<div class="mt-4">
-  <%= link_to 'New', new_resource_path, class: "btn btn-primary" %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1><%= resource.name.pluralize %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <%= content_tag :div, class: @scopes.any? ? 'col-3' : 'd-none' do %>
+      <%= render 'scopes', scopes: @scopes %>
+    <% end %>
+    <%= content_tag :div, class: @scopes.any? ? 'col-9' : 'col-12' do %>
+      <%= render 'madmin/resources/index/content', headers: @headers, resources: @resources %>
+    <% end %>
+  </div>
 </div>

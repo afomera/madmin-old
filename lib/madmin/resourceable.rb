@@ -22,6 +22,20 @@ module Madmin
         class_variable_set(:@@fields, fresh_fields)
       end
 
+      def scopes
+        class_variable_get(:@@scopes)
+      rescue NameError
+        []
+      end
+
+      def scope(*args)
+        validate_scopes!(args)
+
+        fresh_scopes = scopes << args
+
+        class_variable_set(:@@scopes, fresh_scopes.flatten.uniq)
+      end
+
       def formable_fields
         fields.select { |_key, value| value[:form] }
       end
@@ -97,6 +111,15 @@ module Madmin
         elsif !valid_type?(args.second)
           raise WrongArgumentError,
                 "#{name} expected Madmin::Field type as the field type as the second argument."
+        end
+      end
+
+      def validate_scopes!(args)
+        args.each do |arg|
+          if !self.name.constantize.respond_to?(arg)
+            raise UndefinedScopeError,
+                  ".#{arg.to_s} is not a valid scope on #{self.name}"
+          end
         end
       end
     end
