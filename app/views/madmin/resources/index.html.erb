@@ -3,17 +3,15 @@
 <table class="table">
   <% @resources.each do |resource| %>
     <tr>
-      <% resource.index_fields.each.with_index do |field, index| %>
+      <% resource.index_fields.each do |field| %>
         <td>
-          <% if index.zero? %>
-            <%= link_to resource.id, resource_path(id: resource.id) %>
-          <% else %>
-            <%= resource.send(field[0]) %>
-          <% end %>
+          <%= render "#{field.to_partial_path}/index", field: field, resource: resource %>
         </td>
       <% end %>
     </tr>
   <% end %>
 </table>
 
-<%= link_to 'New', new_resource_path %>
+<div class="mt-4">
+  <%= link_to 'New', new_resource_path, class: "btn btn-primary" %>
+</div>

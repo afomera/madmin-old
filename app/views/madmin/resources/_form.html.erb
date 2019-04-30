@@ -1,4 +1,4 @@
-<%= form_for resource, url: url do |f| %>
+<%= form_for resource, url: url do |form| %>
   <% if resource.errors.any? %>
     <% resource.errors.full_messages.each do |message| %>
       <li><%= message %></li>
@@ -7,12 +7,11 @@
 
   <% resource.fields.each do |field| %>
     <% if field.formable? %>
-      <div>
-        <%= f.label field.key, field.label %>
-        <%= f.send(field.input, field.key) %>
-      </div>
+      <%= render "#{field.to_partial_path}/form", field: field, form: form %>
     <% end %>
   <% end %>
 
-  <%= f.submit %>
+  <div class="mt-4">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
 <% end %>

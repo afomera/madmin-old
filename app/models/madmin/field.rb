@@ -18,6 +18,10 @@ module Madmin
       resource.show_all_fields? || key.in?(resource.showable_fields)
     end
 
+    def to_partial_path
+      "madmin/fields/#{self.class.to_s.split('::').last.underscore}"
+    end
+
     def value
       resource.send(key)
     end

@@ -1,19 +1,12 @@
 <h1><%= @resource.name %> <%= @resource.id %></h1>
 
-<table class="table">
-  <% @resource.fields.each do |field| %>
-    <% if field.readable? %>
-      <tr>
-        <td>
-          <%= field.label %>
-        </td>
-        <td>
-          <%= field.value %>
-        </td>
-      </tr>
-    <% end %>
+<% @resource.fields.each do |field| %>
+  <% if field.readable? %>
+    <%= render "#{field.to_partial_path}/show", field: field %>
   <% end %>
-</table>
+<% end %>
 
-<%= link_to 'Edit', edit_resource_path(id: @resource.id) %>
-<%= link_to 'Delete', resource_path(id: @resource.id), method: :delete %>
+<div class="mt-4">
+  <%= link_to 'Edit', edit_resource_path(id: @resource.id), class: "btn btn-primary" %>
+  <%= link_to 'Delete', resource_path(id: @resource.id), method: :delete, class: "btn btn-danger" %>
+</div>
