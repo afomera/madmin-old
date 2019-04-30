@@ -22,16 +22,16 @@ module Madmin
         class_variable_set(:@@fields, fresh_fields)
       end
 
-      def editable_fields
-        fields.select { |_key, value| value[:write] }
+      def formable_fields
+        fields.select { |_key, value| value[:form] }
       end
 
-      def edit_all_fields!
-        class_variable_set(:@@edit_all_fields, true)
+      def form_all_fields!
+        class_variable_set(:@@form_all_fields, true)
       end
 
-      def edit_all_fields?
-        class_variable_get(:@@edit_all_fields)
+      def form_all_fields?
+        class_variable_get(:@@form_all_fields)
       rescue NameError
         false
       end
@@ -40,16 +40,16 @@ module Madmin
         super.to_s.split("::").last.underscore.split("_").reverse.drop(1).join(" ").capitalize
       end
 
-      def readable_fields
-        fields.select { |_key, value| value[:read] }
+      def showable_fields
+        fields.select { |_key, value| value[:show] }
       end
 
-      def read_all_fields!
-        class_variable_set(:@@read_all_fields, true)
+      def show_all_fields!
+        class_variable_set(:@@show_all_fields, true)
       end
 
-      def read_all_fields?
-        class_variable_get(:@@read_all_fields)
+      def show_all_fields?
+        class_variable_get(:@@show_all_fields)
       rescue NameError
         false
       end
@@ -58,8 +58,8 @@ module Madmin
         true
       end
 
-      def table_fields
-        fields.select { |_key, value| value[:table] }
+      def index_fields
+        fields.select { |_key, value| value[:index] }
       end
 
       private
@@ -75,10 +75,10 @@ module Madmin
 
         {
           label: has_options ? options.fetch(:label, default_label) : default_label,
-          read: has_options ? options.fetch(:read, true) : false,
-          table: has_options ? options.fetch(:table, false) : false,
+          show: has_options ? options.fetch(:show, true) : false,
+          index: has_options ? options.fetch(:index, false) : false,
           type: args[1],
-          write: has_options ? options.fetch(:write, false) : false
+          form: has_options ? options.fetch(:form, false) : false
         }
       end
 

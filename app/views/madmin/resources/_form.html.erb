@@ -6,7 +6,7 @@
   <% end %>
 
   <% resource.fields.each do |field| %>
-    <% if field.editable? %>
+    <% if field.formable? %>
       <div>
         <%= f.label field.key, field.label %>
         <%= f.send(field.input, field.key) %>

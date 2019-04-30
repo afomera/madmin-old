@@ -3,7 +3,7 @@
 <table class="table">
   <% @resources.each do |resource| %>
     <tr>
-      <% resource.table_fields.each.with_index do |field, index| %>
+      <% resource.index_fields.each.with_index do |field, index| %>
         <td>
           <% if index.zero? %>
             <%= link_to resource.id, resource_path(id: resource.id) %>

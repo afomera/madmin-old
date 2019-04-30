@@ -1,10 +1,10 @@
 module Madmin
   class ResourceDecorator < SimpleDelegator
-    delegate :editable_fields, to: :madmin_resource
-    delegate :edit_all_fields?, to: :madmin_resource
-    delegate :readable_fields, to: :madmin_resource
-    delegate :read_all_fields?, to: :madmin_resource
-    delegate :table_fields, to: :madmin_resource
+    delegate :formable_fields, to: :madmin_resource
+    delegate :form_all_fields?, to: :madmin_resource
+    delegate :showable_fields, to: :madmin_resource
+    delegate :show_all_fields?, to: :madmin_resource
+    delegate :index_fields, to: :madmin_resource
 
     def initialize(resource)
       @resource = resource

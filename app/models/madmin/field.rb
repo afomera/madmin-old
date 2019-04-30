@@ -10,12 +10,12 @@ module Madmin
       @resource = resource
     end
 
-    def editable?
-      resource.edit_all_fields? || key.in?(resource.editable_fields)
+    def formable?
+      resource.form_all_fields? || key.in?(resource.formable_fields)
     end
 
     def readable?
-      resource.read_all_fields? || key.in?(resource.readable_fields)
+      resource.show_all_fields? || key.in?(resource.showable_fields)
     end
 
     def value

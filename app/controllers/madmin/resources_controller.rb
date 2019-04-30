@@ -67,7 +67,7 @@ module Madmin
 
     def resource_params
       params.require(resource_name.downcase.to_sym)
-            .permit(madmin_resource.editable_fields.keys)
+            .permit(madmin_resource.formable_fields.keys)
     end
   end
 end
