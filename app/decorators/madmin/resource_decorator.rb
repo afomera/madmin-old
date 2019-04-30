@@ -32,7 +32,7 @@ module Madmin
     attr_reader :resource
 
     def instantiate_field(key, field)
-      field[:type].new(key: key, label: field[:label], resource: self)
+      field[:type].new(key: key, field: field, resource: self)
     end
   end
 end

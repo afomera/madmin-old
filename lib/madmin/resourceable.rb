@@ -87,13 +87,22 @@ module Madmin
         has_options   = options.is_a?(Hash)
         default_label = label_from_column(args[0])
 
-        {
+        fields = {
           label: has_options ? options.fetch(:label, default_label) : default_label,
           show: has_options ? options.fetch(:show, true) : false,
           index: has_options ? options.fetch(:index, false) : false,
           type: args[1],
           form: has_options ? options.fetch(:form, false) : false,
         }
+
+        if args[1].association?
+          association = name.constantize.reflect_on_all_associations.find { |association| association.name == args[0] }
+          fields[:foreign_class] = association.klass
+          fields[:foreign_key]   = association.foreign_key
+          fields[:foreign_scope] = has_options ? options.fetch(:scope, :all) : :all
+        end
+
+        fields
       end
 
       def label_from_column(column)

@@ -1,0 +1,7 @@
+<div class="form-group">
+  <%= form.label field.key %>
+  <%= form.select field.foreign_key,
+                  options_from_collection_for_select(field.foreign_class.send(field.foreign_scope), :id, :name),
+                  {},
+                  class: 'form-control' %>
+</div>

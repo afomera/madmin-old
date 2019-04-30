@@ -1,13 +1,23 @@
 module Madmin
   class Field
+    attr_reader :foreign_class
+    attr_reader :foreign_key
+    attr_reader :foreign_scope
     attr_reader :key
     attr_reader :label
     attr_reader :resource
 
-    def initialize(key:, label:, resource:)
+    def initialize(key:, field:, resource:)
+      @foreign_class = field[:foreign_class]
+      @foreign_key = field[:foreign_key]
+      @foreign_scope = field[:foreign_scope]
       @key = key
-      @label = label
+      @label = field[:label]
       @resource = resource
+    end
+
+    def self.association?
+      false
     end
 
     def formable?
