@@ -22,6 +22,10 @@ module Madmin
       false
     end
 
+    def self.polymorphic?
+      false
+    end
+
     def formable?
       resource.form_all_fields? || key.in?(resource.formable_fields)
     end

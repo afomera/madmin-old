@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col-3">
+    <%= field.label %>
+  </div>
+  <div class="col-9">
+    <%= link_to Madmin::ResourceDecorator.new(field.value).send(field.foreign_display_value), resource_path(Madmin::ResourceDecorator.new(field.value).slug, field.value.id) %>
+  </div>
+</div>

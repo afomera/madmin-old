@@ -54,6 +54,10 @@ module Madmin
         name.split("::").join(" ")
       end
 
+      def model
+        name.constantize
+      end
+
       def name
         super.to_s.split("Madmin::Resources::").last.to_s
       end
@@ -109,6 +113,10 @@ module Madmin
           fields[:foreign_display_value] = has_options ? options.fetch(:display_value, :name) : :name
           fields[:foreign_key] = association.foreign_key
           fields[:foreign_scope] = :all
+        end
+
+        if args[1].polymorphic?
+          fields[:foreign_display_value] = has_options ? options.fetch(:display_value, :name) : :name
         end
 
         fields

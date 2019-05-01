@@ -21,6 +21,11 @@ module Madmin
       else
         @collection = resource.all.map { |r| ResourceDecorator.new(r) }
       end
+
+      respond_to do |format|
+        format.html
+        format.json { render json: @collection.map { |c| {id: c.id, display_value: c.title} } }
+      end
     end
 
     def show
@@ -67,7 +72,15 @@ module Madmin
     end
 
     def form_keys
-      madmin_resource.formable_fields.map { |key, value| value.dig(:foreign_key) ? value[:foreign_key] : key }
+      keys = madmin_resource.formable_fields.map { |key, value|
+        if value[:type].polymorphic?
+          ["#{key}_id".to_sym, "#{key}_type"]
+        else
+          value.dig(:foreign_key) ? value[:foreign_key] : key
+        end
+      }
+
+      keys.flatten
     end
 
     def madmin_resource
