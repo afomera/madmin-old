@@ -3,17 +3,15 @@ module Madmin
     class User
       include Madmin::Resourceable
 
-      scope :active
-      scope :inactive
-
-      field :id, Madmin::Field::Number, index: true, label: "ID"
-      field :email, Madmin::Field::Email, index: true, form: true, label: "Customer email"
-      field :first_name, Madmin::Field::Text, index: true, form: true
-      field :last_name, Madmin::Field::Text, index: true, form: true
-      field :alias, Madmin::Field::Select, form: true, collection: ["John", "Jane"]
-      field :active, Madmin::Field::CheckBox, index: true, form: true
-      field :encrypted_password, Madmin::Field::Password, form: true
-      field :posts, Madmin::Field::HasMany, form: true
+      field :id, Madmin::Field::Number
+      field :email, Madmin::Field::Text
+      field :first_name, Madmin::Field::Text
+      field :last_name, Madmin::Field::Text
+      field :active, Madmin::Field::CheckBox
+      field :created_at, Madmin::Field::DateTime
+      field :updated_at, Madmin::Field::DateTime
+      field :encrypted_password, Madmin::Field::Text
+      field :alias, Madmin::Field::Text
     end
   end
 end

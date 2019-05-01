@@ -1,0 +1,11 @@
+module Madmin
+  class Resources
+    class <%= class_name %>
+      include Madmin::Resourceable
+
+<% attributes.each do |name, type| -%>
+      field :<%= name %>, Madmin::<%= type %>
+<% end -%>
+    end
+  end
+end
