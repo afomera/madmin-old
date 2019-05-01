@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_30_232456) do
+ActiveRecord::Schema.define(version: 2019_05_01_035425) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "commentable_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_04_30_232456) do
     t.boolean "active", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_password"
   end
 
 end

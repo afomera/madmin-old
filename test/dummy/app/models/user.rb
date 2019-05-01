@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attribute :alias, :string
+
   has_many :posts
 
   validates :first_name, presence: true

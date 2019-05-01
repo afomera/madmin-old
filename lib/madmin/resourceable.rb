@@ -120,6 +120,10 @@ module Madmin
           fields[:foreign_scope] = :all
         end
 
+        if args[1].select?
+          fields[:select_options] = has_options ? options.fetch(:collection, []) : []
+        end
+
         fields
       end
 

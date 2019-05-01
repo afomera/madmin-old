@@ -10,7 +10,9 @@ module Madmin
       field :email, Madmin::Field::Email, index: true, form: true, label: "Customer email"
       field :first_name, Madmin::Field::Text, index: true, form: true
       field :last_name, Madmin::Field::Text, index: true, form: true
+      field :alias, Madmin::Field::Select, form: true, collection: ["John", "Jane"]
       field :active, Madmin::Field::CheckBox, index: true, form: true
+      field :encrypted_password, Madmin::Field::Password, form: true
       field :posts, Madmin::Field::HasMany, form: true
     end
   end

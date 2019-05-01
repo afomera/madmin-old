@@ -7,6 +7,7 @@ module Madmin
     attr_reader :key
     attr_reader :label
     attr_reader :resource
+    attr_reader :select_options
 
     def initialize(key:, field:, resource:)
       @foreign_class = field[:foreign_class]
@@ -16,6 +17,7 @@ module Madmin
       @key = key
       @label = field[:label]
       @resource = resource
+      @select_options = field[:select_options]
     end
 
     def self.association?
@@ -23,6 +25,10 @@ module Madmin
     end
 
     def self.polymorphic?
+      false
+    end
+
+    def self.select?
       false
     end
 
