@@ -6,20 +6,20 @@ module Madmin
 
     before_action :find_resource, only: [:show, :edit, :update, :destroy]
 
-    helper_method :resource
+    helper_method :madmin_resource
 
     def index
       @scopes = madmin_resource.scopes
-      @headers = madmin_resource.index_fields.map { |_, v| v[:label] }
+      @headers = madmin_resource.index_headers
 
       if params[:scope]&.to_sym&.in?(@scopes)
         begin
-          @collection = resource.send(params[:scope]).map { |r| ResourceDecorator.new(r) }
+          @collection = resource.send(params[:scope])
         rescue ArgumentError
           raise ScopeWithArgumentsError, "The scope #{params[:scope.to_sym]} on #{resource.name} takes arguments, which are currently unsupported."
         end
       else
-        @collection = resource.all.map { |r| ResourceDecorator.new(r) }
+        @collection = resource.all
       end
 
       respond_to do |format|
@@ -72,19 +72,11 @@ module Madmin
     end
 
     def form_keys
-      keys = madmin_resource.formable_fields.map { |key, value|
-        if value[:type].polymorphic?
-          ["#{key}_id".to_sym, "#{key}_type"]
-        else
-          value.dig(:foreign_key) ? value[:foreign_key] : key
-        end
-      }
-
-      keys.flatten
+      madmin_resource.form_fields.map { |field| field.strong_params_keys }.flatten
     end
 
     def madmin_resource
-      Object.const_get("::Madmin::Resources::#{resource_name}")
+      Object.const_get("::Madmin::Resources::#{resource_name}").new
     end
 
     def resource

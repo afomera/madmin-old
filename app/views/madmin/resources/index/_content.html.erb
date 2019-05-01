@@ -7,9 +7,14 @@
   <% if collection.any? %>
     <% collection.each do |resource| %>
       <tr>
-        <% resource.index_fields.each do |field| %>
+        <% madmin_resource.index_fields.each do |field| %>
           <td>
-            <%= render "#{field.to_partial_path}/index", field: field, resource: resource %>
+            <%=
+              render "#{field.to_partial_path}/index",
+                     field: field,
+                     madmin_resource: madmin_resource,
+                     resource: resource
+            %>
           </td>
         <% end %>
       </tr>

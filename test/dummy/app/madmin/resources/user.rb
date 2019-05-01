@@ -1,5 +1,5 @@
 module Madmin
-  class Resources
+  module Resources
     class User
       include Madmin::Resourceable
 

@@ -1,10 +1,11 @@
 <nav class="nav bg-dark col-md-2 sidebar px-4 py-3 d-flex flex-column">
   <h3><%= link_to 'Madmin', root_path %></h3>
+
   <ul class="list-unstyled mt-3">
-    <% resource_types.each do |type| %>
-      <% next unless type.show_in_menu? %>
+    <% available_resources.each do |resource| %>
+      <% next unless resource.show_in_menu? %>
       <li class="mb-1">
-        <%= link_to type.name.pluralize, resources_path(type.name.downcase.pluralize), class: "text-white" %>
+        <%= link_to resource.friendly_name.pluralize, resources_path(resource.slug), class: "text-white" %>
       </li>
     <% end %>
   </ul>

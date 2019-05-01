@@ -1,10 +1,28 @@
 <div class="form-group">
-  <%= form.label "#{field.key}".to_sym %>
-  <%= form.select polymorphic_type(field).to_sym, polymorphic_models(field.key).map { |m| [m.name, m.name, { "data-slug" => madmin_resource_for(model: m).slug }] }, { include_blank: true }, id: polymorphic_type(field), class: "form-control" %>
-  <% if polymorphic_relationship_exists?(form: form, field: field) %>
-     <%= form.select polymorphic_id(field).to_sym, polymorphic_options_for_selected_type(form: form, field: field), {}, id: polymorphic_id(field), class: "form-control" %>
+  <%= form.label field.key %>
+  <%=
+    form.select field.polymorphic_type_param,
+                polymorphic_models(field.key).map { |m| [m.name, m.name, { "data-slug" => madmin_resource_for(model: m).slug }] },
+                { include_blank: true },
+                id: field.polymorphic_type_param,
+                class: "form-control"
+  %>
+  <% if field.polymorphic_relationship_exists?(form.object) %>
+    <%=
+      form.select field.polymorphic_id_param,
+                  polymorphic_options_for_selected_type(form: form, field: field),
+                  {},
+                  id: field.polymorphic_id_param,
+                  class: "form-control"
+    %>
   <% else %>
-     <%= form.select polymorphic_id(field).to_sym, [], {}, id: polymorphic_id(field), class: "d-none form-control" %>
+    <%=
+      form.select field.polymorphic_id_param,
+                  [],
+                  {},
+                  id: field.polymorphic_id_param,
+                  class: "d-none form-control"
+    %>
   <% end %>
 </div>
 

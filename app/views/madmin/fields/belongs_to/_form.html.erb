@@ -1,7 +1,14 @@
 <div class="form-group">
   <%= form.label field.key %>
-  <%= form.select field.foreign_key,
-                  options_from_collection_for_select(field.foreign_class.send(field.foreign_scope), :id, field.foreign_display_value, field.value.try(:id)),
-                  { include_blank: true },
-                  class: 'form-control' %>
+  <%=
+    form.select field.association_foreign_key,
+                options_from_collection_for_select(
+                  field.association_collection,
+                  :id,
+                  field.association_display_value,
+                  field.association_id_or_blank_for(resource)
+                ),
+                { include_blank: true },
+                class: 'form-control'
+  %>
 </div>

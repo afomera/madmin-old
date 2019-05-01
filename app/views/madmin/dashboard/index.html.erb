@@ -1,5 +1,5 @@
 <h1>Administration</h1>
-<% resource_types.each do |type| %>
+<% available_resources.each do |type| %>
   <li>
     <%= link_to type.friendly_name.pluralize, resources_path(type.slug) %>
   </li>

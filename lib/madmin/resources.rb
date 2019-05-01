@@ -1,5 +1,5 @@
 module Madmin
-  class Resources
+  module Resources
     # TODO: link to documentation in error message.
     def self.gather
       all

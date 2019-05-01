@@ -1,9 +1,7 @@
 <h1><%= @resource.name %> <%= @resource.id %></h1>
 
-<% @resource.fields.each do |field| %>
-  <% if field.readable? %>
-    <%= render "#{field.to_partial_path}/show", field: field %>
-  <% end %>
+<% madmin_resource.show_fields.each do |field| %>
+  <%= render "#{field.to_partial_path}/show", field: field, resource: @resource %>
 <% end %>
 
 <div class="mt-4">
