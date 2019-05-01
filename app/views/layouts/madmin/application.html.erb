@@ -10,10 +10,15 @@
   <%= stylesheet_link_tag    "madmin/application", media: "all" %>
 </head>
 <body>
-  <%= render 'application/navigation' %>
-
-  <div class="container mt-4">
-    <%= yield %>
+  <div class="container-fluid">
+    <div class="row">
+      <%= render 'application/navigation' %>
+      <div class="col-10 ml-sm-auto mt-4">
+        <div class="container">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
