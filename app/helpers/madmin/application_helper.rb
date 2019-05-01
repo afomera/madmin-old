@@ -1,14 +1,7 @@
 module Madmin
   module ApplicationHelper
-    def polymorphic_models(type)
-      all_resources = Madmin::Resources.all.map { |r| Madmin::ResourceDecorator.new(r) }
-
-      polymorphic_resources = all_resources.select { |resource|
-        associations = resource.model.reflect_on_all_associations
-        associations.select { |a| a.options.dig(:as) === type }.any?
-      }
-
-      polymorphic_resources.map(&:model)
+    def madmin_resource_for(model:)
+      Object.const_get("::Madmin::Resources::#{model}")
     end
   end
 end

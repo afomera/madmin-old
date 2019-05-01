@@ -1,11 +1,10 @@
 <div class="form-group">
   <%= form.label "#{field.key}".to_sym %>
-  <%= form.select "#{field.key}_type".to_sym, polymorphic_models(field.key).map { |m| [m.name, m.name, { "data-slug" => Madmin::ResourceDecorator.new(m.new).slug }] }, { include_blank: true }, id: "#{field.key}_type", class: "form-control" %>
-
-  <% if form.object.send("#{field.key}_type") && form.object.send("#{field.key}_id") %>
-     <%= form.select "#{field.key}_id".to_sym, options_from_collection_for_select(form.object.send("#{field.key}_type").constantize.send(:all), :id, :title, form.object.send("#{field.key}_id")), {}, id: "#{field.key}_id", class: "form-control" %>
+  <%= form.select polymorphic_type(field).to_sym, polymorphic_models(field.key).map { |m| [m.name, m.name, { "data-slug" => madmin_resource_for(model: m).slug }] }, { include_blank: true }, id: polymorphic_type(field), class: "form-control" %>
+  <% if polymorphic_relationship_exists?(form: form, field: field) %>
+     <%= form.select polymorphic_id(field).to_sym, polymorphic_options_for_selected_type(form: form, field: field), {}, id: polymorphic_id(field), class: "form-control" %>
   <% else %>
-     <%= form.select "#{field.key}_id".to_sym, [], {}, id: "#{field.key}_id", class: "d-none form-control" %>
+     <%= form.select polymorphic_id(field).to_sym, [], {}, id: polymorphic_id(field), class: "d-none form-control" %>
   <% end %>
 </div>
 

@@ -117,6 +117,7 @@ module Madmin
 
         if args[1].polymorphic?
           fields[:foreign_display_value] = has_options ? options.fetch(:display_value, :name) : :name
+          fields[:foreign_scope] = :all
         end
 
         fields

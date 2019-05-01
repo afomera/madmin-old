@@ -3,7 +3,7 @@
     <div class="col">
       <h3><%= field.name %></h3>
       <% if !field.value %>
-        <%= link_to "Add", new_resource_path(Madmin::ResourceDecorator.new(field.foreign_class.new).slug, ActiveModel::Naming.param_key(field.foreign_class) => { field.foreign_key => field.resource.id }) %>
+        <%= link_to "Add", new_resource_path(madmin_resource_for(model: field.foreign_class).slug, ActiveModel::Naming.param_key(field.foreign_class) => { field.foreign_key => field.resource.id }) %>
       <% else %>
         <%= render "madmin/resources/index/content", headers: [], collection: [Madmin::ResourceDecorator.new(field.value)], show_new_button: false %>
       <% end %>
