@@ -1,7 +1,12 @@
 <div class="form-group">
   <%= form.label "#{field.key}".to_sym %>
-  <%= form.select "#{field.key}_type".to_sym, polymorphic_models(field.key).map { |m| [m.name, m.name, { "data-slug" => Madmin::ResourceDecorator.new(m.new).slug }] }, { include_blank: true }, id: "#{field.key}_type" %>
-  <%= form.select "#{field.key}_id".to_sym, [], {}, id: "#{field.key}_id", class: "d-none" %>
+  <%= form.select "#{field.key}_type".to_sym, polymorphic_models(field.key).map { |m| [m.name, m.name, { "data-slug" => Madmin::ResourceDecorator.new(m.new).slug }] }, { include_blank: true }, id: "#{field.key}_type", class: "form-control" %>
+
+  <% if form.object.send("#{field.key}_type") && form.object.send("#{field.key}_id") %>
+     <%= form.select "#{field.key}_id".to_sym, options_from_collection_for_select(form.object.send("#{field.key}_type").constantize.send(:all), :id, :title, form.object.send("#{field.key}_id")), {}, id: "#{field.key}_id", class: "form-control" %>
+  <% else %>
+     <%= form.select "#{field.key}_id".to_sym, [], {}, id: "#{field.key}_id", class: "d-none form-control" %>
+  <% end %>
 </div>
 
 <script>
