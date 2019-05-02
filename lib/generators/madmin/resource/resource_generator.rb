@@ -4,8 +4,6 @@ require "madmin/generator_helpers"
 module Madmin
   module Generators
     class ResourceGenerator < Rails::Generators::NamedBase
-      include Madmin::GeneratorHelpers
-
       ATTRIBUTE_TYPE_MAPPING = {
         boolean: "Field::CheckBox",
         date: "Field::DateTime",
@@ -31,8 +29,39 @@ module Madmin
 
         def attributes
           klass.attribute_types.map do |name, attr|
+            # Skip attributes related to associations
+            next if ignored_attributes.include?(name)
+
             [name, madmin_type_for_column(attr.type)]
+          end.compact
+        end
+
+        def associations
+          klass.reflections.map do |name, association|
+            if association.polymorphic?
+              [name, "Field::Polymorphic"]
+            elsif association.belongs_to?
+              [name, "Field::BelongsTo"]
+            elsif association.has_one?
+              [name, "Field::HasOne"]
+            else
+              [name, "Field::HasMany"]
+            end
           end
+        end
+
+        def ignored_attributes
+          attrs = []
+
+          klass.reflections.map do |name, association|
+            if association.polymorphic?
+              attrs += [association.foreign_key, association.foreign_type]
+            elsif association.belongs_to?
+              attrs += [association.foreign_key]
+            end
+          end
+
+          attrs
         end
 
         def klass

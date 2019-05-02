@@ -3,7 +3,7 @@ module Madmin
     class <%= class_name %>
       include Madmin::Resourceable
 
-<% attributes.each do |name, type| -%>
+<% (attributes + associations ).each do |name, type| -%>
       field :<%= name %>, Madmin::<%= type %>
 <% end -%>
     end

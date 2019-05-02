@@ -26,6 +26,22 @@ Or install it yourself as:
 $ gem install madmin
 ```
 
+Then you can run the installer to generate resources for all models in
+your app that inherit from `ActiveRecord::Base` by running:
+
+```bash
+rails generate madmin:install
+```
+
+## Generating Resources
+
+To generate (or re-generate) a Madmin dashboard for a resource, you
+can run the following command and pass in the model name
+
+```bash
+rails generate madmin:install User
+```
+
 ## Autoloading Lib
 
 If you want to avoid having to restart your Rails application everytime you make an adjustment to a `lib/madmin/resources.rb`, add the following to `config/application.rb`:
