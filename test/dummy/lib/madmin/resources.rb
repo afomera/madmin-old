@@ -1,5 +1,5 @@
 module Madmin
-  class Resources
+  module Resources
     def self.all
       [User, Post, Page, Comment]
     end

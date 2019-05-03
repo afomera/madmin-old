@@ -1,5 +1,5 @@
 module Madmin
-  class Resources
+  module Resources
     class Comment
       include Madmin::Resourceable
 

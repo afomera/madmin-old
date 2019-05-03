@@ -1,1 +1,7 @@
-<%= link_to field.value.send(field.foreign_display_value), resource_path(Madmin::ResourceDecorator.new(field.value).slug, field.value.id) %>
+<%=
+  link_to field.association_value_for(resource),
+          resource_path(
+            field.association_slug,
+            field.association_id_for(resource)
+          )
+%>

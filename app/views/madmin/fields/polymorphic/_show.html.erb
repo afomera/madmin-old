@@ -3,6 +3,12 @@
     <%= field.label %>
   </div>
   <div class="col-9">
-    <%= link_to Madmin::ResourceDecorator.new(field.value).send(field.foreign_display_value), resource_path(Madmin::ResourceDecorator.new(field.value).slug, field.value.id) %>
+    <%=
+      link_to field.polymorphic_value_for(resource),
+              resource_path(
+                field.polymorphic_slug_for(resource),
+                field.polymorphic_id_for(resource)
+              )
+    %>
   </div>
 </div>

@@ -3,6 +3,6 @@
     <%= field.label %>
   </div>
   <div class="col-9">
-    <%= 'Password Encrypted' if field.value %>
+    <%= 'Password Encrypted' if field.value_for(resource).present? %>
   </div>
 </div>

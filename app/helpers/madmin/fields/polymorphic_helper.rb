@@ -1,10 +1,6 @@
 module Madmin
   module Fields
     module PolymorphicHelper
-      def polymorphic_id(field)
-        "#{field.key}_id"
-      end
-
       def polymorphic_models(type)
         all_resources = Madmin::Resources.all.map { |r| Madmin::ResourceDecorator.new(r) }
 
@@ -18,19 +14,11 @@ module Madmin
 
       def polymorphic_options_for_selected_type(form:, field:)
         options_from_collection_for_select(
-          form.object.send(polymorphic_type(field)).constantize.send(field.foreign_scope),
+          form.object.send(field.polymorphic_type_param).constantize.send(field.polymorphic_scope),
           :id,
-          field.foreign_display_value,
-          form.object.send(polymorphic_id(field))
+          field.polymorphic_display_value,
+          form.object.send(field.polymorphic_id_param)
         )
-      end
-
-      def polymorphic_relationship_exists?(form:, field:)
-        form.object.send(polymorphic_type(field)) && form.object.send(polymorphic_id(field))
-      end
-
-      def polymorphic_type(field)
-        "#{field.key}_type"
       end
     end
   end

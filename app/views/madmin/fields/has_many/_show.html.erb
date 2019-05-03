@@ -1,9 +1,15 @@
 <div class="mt-3">
   <div class="row">
     <div class="col">
-      <h3><%= field.name %></h3>
-      <%= link_to "Add", new_resource_path(madmin_resource_for(model: field.foreign_class).slug, ActiveModel::Naming.param_key(field.foreign_class) => { field.foreign_key => field.resource.id }) %>
-      <%= render "madmin/resources/index/content", headers: [], collection: field.value.map { |v| Madmin::ResourceDecorator.new(v) }, show_new_button: false %>
+      <h3><%= field.label %></h3>
+      <%= link_to "Add", new_resource_path(field.association_slug, field.association_param => { field.association_foreign_key => resource.id }) %>
+      <%=
+        render "madmin/resources/index/content",
+               headers: [],
+               collection: field.value_for(resource),
+               madmin_resource: madmin_resource_for(model: field.association_class),
+               show_new_button: false
+      %>
     </div>
   </div>
 </div>

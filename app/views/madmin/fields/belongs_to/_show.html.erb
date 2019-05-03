@@ -3,6 +3,6 @@
     <%= field.label %>
   </div>
   <div class="col-9">
-    <%= field.value.send(field.foreign_display_value) %>
+    <%= field.association_value_for(resource) %>
   </div>
 </div>

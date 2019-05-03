@@ -1,9 +1,9 @@
 <div class="list-group">
-  <%= link_to resources_path(resource.name.downcase.pluralize), class: "list-group-item py-2 list-group-item-action #{'active' if params[:scope].blank?}" do %>
+  <%= link_to resources_path(madmin_resource.slug), class: "list-group-item py-2 list-group-item-action #{'active' if params[:scope].blank?}" do %>
     All
   <% end %>
   <% scopes.each do |scope| %>
-    <%= link_to resources_path(resource.name.downcase.pluralize, scope: scope.to_s), class: "list-group-item py-2 list-group-item-action #{'active' if params[:scope] == scope.to_s}" do %>
+    <%= link_to resources_path(madmin_resource.slug, scope: scope.to_s), class: "list-group-item py-2 list-group-item-action #{'active' if params[:scope] == scope.to_s}" do %>
       <%= scope.to_s.titleize %>
     <% end %>
   <% end %>
