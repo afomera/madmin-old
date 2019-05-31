@@ -1,17 +1,16 @@
-require_dependency "madmin/resources"
-
 module Madmin
-  class ApplicationController < ActionController::Base
+  class ApplicationController < BaseController
     protect_from_forgery with: :exception
-    before_action :validate_resources
+
+    before_action :authenticate!
 
     private
 
-    # Taking a peek at all the resources will raise an error if one isn't found.
-    # Let's inform the user if we can't find a resource no matter what page
-    # they're on. This should fail to prevent surprises at run time.
-    def validate_resources
-      Madmin::Resources.all
+    def authenticate!
+      # redirect_to x_path unless current_user
+      #
+      # If using Devise, set this method to call:
+      # authenticate_user!
     end
   end
 end

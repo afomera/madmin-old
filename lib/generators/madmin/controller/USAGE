@@ -1,0 +1,8 @@
+Description:
+    Override certain Madmin controllers for fine-tuning
+
+Example:
+    rails generate madmin:controller Application
+
+    This will create:
+        app/controllers/madmin/application_controller.rb

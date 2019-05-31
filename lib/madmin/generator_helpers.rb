@@ -8,6 +8,6 @@ module Madmin
 
     def generator_options
       {behavior: behavior}
-   end
+    end
   end
 end
