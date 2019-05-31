@@ -7,5 +7,9 @@ module Madmin
     def madmin_resource_for(model:)
       Object.const_get("::Madmin::Resources::#{model}").new
     end
+
+    def pages
+      Madmin::Pages.all
+    end
   end
 end

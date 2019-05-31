@@ -12,6 +12,13 @@ module Madmin
         end
       end
 
+      def install_route
+        inject_into_file(
+          Rails.root.join("config/routes.rb"),
+          after: "Rails.application.routes.draw do\n"
+        ) { "  namespace :madmin do\n  end\n  mount Madmin::Engine => \"/madmin\"\n" }
+      end
+
       private
 
       def resources
