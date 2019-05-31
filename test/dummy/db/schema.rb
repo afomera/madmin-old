@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_05_01_035425) do
-
   create_table "comments", force: :cascade do |t|
     t.integer "commentable_id"
     t.string "commentable_type"
@@ -45,5 +44,4 @@ ActiveRecord::Schema.define(version: 2019_05_01_035425) do
     t.datetime "updated_at", null: false
     t.string "encrypted_password"
   end
-
 end

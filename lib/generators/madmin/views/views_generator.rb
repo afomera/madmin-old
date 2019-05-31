@@ -3,7 +3,7 @@ require "rails/generators/base"
 module Madmin
   module Generators
     class ViewsGenerator < Rails::Generators::Base
-      desc('Copies views for customizing Madmin\'s views')
+      desc("Copies views for customizing Madmin's views")
 
       source_root File.expand_path("../../../../..", __FILE__)
 
